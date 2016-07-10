@@ -12,20 +12,20 @@ import java.util.List;
  */
 public class EbOrderDao extends BaseDao{
 
-    public void saveorder(EbOder order)
+    public int saveorder(EbOder order)
     {
         String sql="insert easybuy_order(eo_user_id,eo_user_name,eo_user_address,eo_create_time,eo_cost,eo_status,eo_type) " +
                 "values(?,?,?,?,?,?,?)";
         List<String> params=new ArrayList<String>();
 
-        params.add(order.getEouserId());
+        params.add(order.getEouserId()+"");
         params.add(order.getEouserName());
         params.add(order.getEouserAddress());
         params.add(DateUtil.parseDateToStr(order.getEocreateTime(),"yyyy-MM-dd"));
         params.add(order.getEoCost()+"");
         params.add(order.getEoStatus()+"");
         params.add(order.getEoType()+"");
-        this.exeucteModify(sql,params);
+        return this.exeucteModify(sql,params);
     }
 }
 

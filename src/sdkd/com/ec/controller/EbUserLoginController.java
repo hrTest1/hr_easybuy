@@ -40,12 +40,19 @@ public class EbUserLoginController extends HttpServlet {
             ebUser.setName(name);
             ebUser.setPassword(password);
             List<String> params = new ArrayList<String>();
-            String sql="select eu_user_name,eu_password from easybuy_user";
-            ResultSet rs = new BaseDao().executeSearch(sql,null);
+            String sql="select * from easybuy_user where eu_user_name=? and eu_password=?";
+            params.add(name);
+            params.add(password);
+            ResultSet rs = new BaseDao().executeSearch(sql,params);
             try {
-                    while (rs.next()){
+                    if (rs.next()){
+                        int id =rs.getInt("eu_user_id");
+
                         String username=rs.getString("eu_user_name");
                         String psw=rs.getString("eu_password");
+                        String addr = rs.getString("eu_address");
+                        ebUser.setId(id);
+                        ebUser.setAddress(addr);
                         if(name.equals(username) && password.equals(psw)){
                             user.setLoginState(true);
                         }

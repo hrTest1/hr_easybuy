@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class EbOder {
     private Integer eoId;
-    private String eouserId;
+    private Integer eouserId;
     private String eouserName;
     private String eouserAddress;
     private Date eocreateTime;
@@ -24,11 +24,11 @@ public class EbOder {
         this.eoId = eoId;
     }
 
-    public String getEouserId() {
+    public Integer getEouserId() {
         return eouserId;
     }
 
-    public void setEouserId(String eouserId) {
+    public void setEouserId(Integer eouserId) {
         this.eouserId = eouserId;
     }
 

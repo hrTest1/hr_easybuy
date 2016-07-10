@@ -62,4 +62,12 @@ public class EbProductDao extends BaseDao{
         }
         return products;
     }
+    public void updateStock(int priod,int quantity)
+    {
+        String sql="update easybuy_product set ep_stock=ep_stock-? where ep_id=?";
+        List<String> params=new ArrayList<String>();
+        params.add(priod+"");
+        params.add(quantity+"");
+        this.exeucteModify(sql,params);
+    }
 }

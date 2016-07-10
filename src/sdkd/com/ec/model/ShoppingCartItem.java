@@ -5,10 +5,14 @@ package sdkd.com.ec.model;
  */
 public class ShoppingCartItem {
     private EbProduct product;
-    private long quantity;
-    private  double cost;
+    private Long quantity;
+    private  Double cost;
 
-    public ShoppingCartItem(EbProduct product,long quantity) {
+    public ShoppingCartItem()
+    {
+
+    }
+    public ShoppingCartItem(EbProduct product,Long quantity) {
         this.product=product;
         this.quantity=quantity;
         this.cost=product.getEp_price()*quantity;
@@ -23,11 +27,11 @@ public class ShoppingCartItem {
         this.product = product;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
         this.cost=product.getEp_price()*quantity;
     }

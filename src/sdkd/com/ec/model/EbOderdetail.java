@@ -5,8 +5,8 @@ package sdkd.com.ec.model;
  */
 public class EbOderdetail {
     private Integer eodId;
-    private String eoId;
-    private String epId;
+    private Integer eoId;
+    private Integer epId;
     private Integer eodQuantity;
     private Double eodCost;
 
@@ -18,19 +18,19 @@ public class EbOderdetail {
         this.eodId = eodId;
     }
 
-    public String getEoId() {
+    public Integer getEoId() {
         return eoId;
     }
 
-    public void setEoId(String eoId) {
+    public void setEoId(Integer eoId) {
         this.eoId = eoId;
     }
 
-    public String getEpId() {
+    public Integer getEpId() {
         return epId;
     }
 
-    public void setEpId(String epId) {
+    public void setEpId(Integer epId) {
         this.epId = epId;
     }
 

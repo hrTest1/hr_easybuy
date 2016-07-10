@@ -78,6 +78,10 @@ public class BaseDao {
                 }
             }
             result = ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                result = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
