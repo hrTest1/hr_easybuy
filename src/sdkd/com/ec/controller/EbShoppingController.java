@@ -41,14 +41,21 @@ public class EbShoppingController extends HttpServlet {
             }
             EbProduct product=productDao.getProductById(id);
 
+            ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("cart");
             String action=request.getParameter("action");
             if("mod".equals(action)){
                 modifyCart(request, response);
             }else if("remove".equals(action)){
                 removeCart(request, response);
-            }else {
+            }else if("moveall".equals(action))
+            {
+                List<ShoppingCartItem> itemsclear=new ArrayList<ShoppingCartItem>();
+                cart.setItems(itemsclear);
+                request.getSession().setAttribute("totalcost",0);
+            }
+            else {
                 //存储到Session
-                ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("cart");
+
 
                 if (cart == null) {
                     cart = new ShoppingCart();
@@ -72,6 +79,7 @@ public class EbShoppingController extends HttpServlet {
 
                 }
                 request.getSession().setAttribute("cart", cart);
+                request.getSession().setAttribute("totalcost",cart.getTotalCost());
             }
 
             response.sendRedirect("/shopping.jsp");
@@ -91,6 +99,7 @@ public class EbShoppingController extends HttpServlet {
             index = Integer.valueOf(indexParam);
         }
         cart.modifyQuantity(index,quantity);
+        request.getSession().setAttribute("totalcost",cart.getTotalCost());
     }
 
     public void removeCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -101,5 +110,9 @@ public class EbShoppingController extends HttpServlet {
             index = Integer.valueOf(indexParam);
         }
         cart.removeItem(index);
+        request.getSession().setAttribute("totalcost",cart.getTotalCost());
+    }
+    public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

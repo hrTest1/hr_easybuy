@@ -16,7 +16,7 @@
 			<a href="register.jsp">注册</a>
 		</c:if>
 		<c:if test="${user==true}">
-			<a href="guestbook.do">留言</a>
+			<a href="guestbook.jsp">留言</a>
 			<a href="index.do?action=unlogin">退出</a>
 		</c:if>
 	</div>
@@ -75,15 +75,16 @@
 					<td class="number">
 						<dl>
 							<dt><input id="number_id_${cart.product.ep_id}" type="text" name="number" value="${cart.quantity}" /></dt>
-							<dd onclick="modifyQuantity(${cart.product.ep_id},);">修改</dd>
+							<dd onclick="modifyQuantity(${cart.product.ep_id},${status.index});">修改</dd>
 						</dl>
 					</td>
-					<td class="delete"><a href="javascript:delShopping(1);">删除</a></td>
+					<td class="delete"><a href="javascript:removeShopping(${cart.product.ep_id},${status.index});">删除</a></td>
 				</tr>
 				</c:forEach>
 			</table>
-			<div class="button"><input type="submit" value="" /></div>
-		</form>
+
+			<div class="button"><h1><Font color="red">总价：￥${totalcost}</Font></h1><br><input type="submit" value="" /><br></div>
+       </form>
 	</div>
 	<script type="text/javascript">
 		document.write("Cookie中记录的购物车商品ID："+ getCookie("product") + "，可以在动态页面中进行读取");

@@ -10,7 +10,16 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.jsp">登录</a><a href="register.jsp">注册</a><a href="guestbook.jsp">留言</a></div>
+	<div class="help"><a href="#" class="shopping">购物车</a>
+		<c:if test="${user==false}">
+			<a href="login.jsp">登录</a>
+			<a href="register.jsp">注册</a>
+		</c:if>
+		<c:if test="${user==true}">
+			<a href="guestbook.jsp">留言</a>
+			<a href="index.do?action=unlogin">退出</a>
+		</c:if>
+	</div>
 	<div class="navbar">
 		<ul class="clearfix">
 			<li class="current"><a href="#">首页</a></li>
@@ -54,9 +63,9 @@
 			<div class="box">
 				<div class="msg">
 					<p>恭喜：购买成功！</p>
-					<p>正在进入首页...</p>
+					<p>正在返回...</p>
 					<script type="text/javascript">
-						setTimeout("location.href='index.html'", 3000);
+						setTimeout("location.href='shopping.do?action=moveall'", 3000);
 					</script>
 				</div>
 			</div>

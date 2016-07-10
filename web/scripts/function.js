@@ -182,3 +182,6 @@ function modifyQuantity(id,index){
 	var number = document.getElementById("number_id_" + id);
 	location.href = "shopping.do?action=mod&id="+id+"&quantity="+number.value+"&index="+index;
 }
+function removeShopping(id,index) {
+	location.href = "shopping.do?action=remove&id="+id+"&index="+index;
+}

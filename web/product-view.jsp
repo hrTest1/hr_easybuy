@@ -1,4 +1,4 @@
-﻿﻿<%@ page import="java.util.List" %>
+﻿<%@ page import="java.util.List" %>
 <%@ page import="sdkd.com.ec.model.EbProduct" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -18,7 +18,7 @@
 			<a href="register.jsp">注册</a>
 		</c:if>
 		<c:if test="${user==true}">
-			<a href="guestbook.do">留言</a>
+			<a href="guestbook.jsp">留言</a>
 			<a href="index.do?action=unlogin">退出</a>
 		</c:if>
 	</div>
