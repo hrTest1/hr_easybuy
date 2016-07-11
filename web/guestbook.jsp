@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,7 +11,9 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.jsp">登录</a><a href="register.jsp">注册</a><a href="guestbook.jsp">留言</a></div>
+	<div class="help"><a href="#" class="shopping">购物车</a>
+			<a href="index.do?action=unlogin">退出</a>
+	</div>
 	<div class="navbar">
 		<ul class="clearfix">
 			<li class="current"><a href="#">首页</a></li>
@@ -75,27 +79,16 @@
 		<div class="guestbook">
 			<h2>全部留言</h2>
 			<ul>
-				<li>
-					<dl>
-						<dt>那个什么衣服贵吗</dt>
-						<dd class="author">网友：张三丰 <span class="timer">2010:10:10 20:00:01</span></dd>
-						<dd>不贵</dd>
-					</dl>
-				</li>
-				<li>
-					<dl>
-						<dt>那个什么衣服贵吗</dt>
-						<dd class="author">网友：张三丰 <span class="timer">2010:10:10 20:00:01</span></dd>
-						<dd>不贵</dd>
-					</dl>
-				</li>
-				<li>
-					<dl>
-						<dt>那个什么衣服贵吗</dt>
-						<dd class="author">网友：张三丰 <span class="timer">2010:10:10 20:00:01</span></dd>
-						<dd>不贵</dd>
-					</dl>
-				</li>
+				<c:forEach var="book" items="${booklist}">
+				  	<li>
+						<dl>
+							<dt>${book.content}</dt>
+							<dd class="author">网友：${book.name}&nbsp;<fmt:formatDate value="${book.createTime}" pattern="yyyy-MM-dd"/></dd>
+							<dd>回复：${book.reply}&nbsp;<fmt:formatDate value="${book.replyTime}" pattern="yyyy-MM-dd"/></dd>
+							<dd></dd>
+						</dl>
+					</li>
+				</c:forEach>
 			</ul>
 			<div class="clear"></div>
 			<div class="pager">
@@ -110,7 +103,7 @@
 				</ul>
 			</div>
 			<div id="reply-box">
-				<form>
+				<form id="guestBookForm" method="post" action="guestbook.do?action=insert" onsubmit="return checkForm(this)">
 					<table>
 						<tr>
 							<td class="field">昵称：</td>

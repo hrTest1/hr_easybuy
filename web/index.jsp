@@ -26,7 +26,7 @@
 
     <c:if test="${user==true}">
       <a href="#">${name}</a>
-      <a href="guestbook.jsp">留言</a>
+      <a href="guestbook.do">留言</a>
       <a href="index.do?action=unlogin">退出</a>
     </c:if>
   </div>

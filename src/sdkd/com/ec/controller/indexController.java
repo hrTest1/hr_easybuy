@@ -47,13 +47,14 @@ public class indexController extends HttpServlet {
         List<EbProduct> productlist = ProductDao.getProduct();
         request.setAttribute("ProductList",productlist);
 
-        request.setAttribute("user",EbUserDao.isLogin());
+
 
         String state = request.getParameter("action");
         if("unlogin".equals(state)){
             EbUserDao user=new EbUserDao();
             user.setLoginState(false);
         }
+        request.setAttribute("user",EbUserDao.isLogin());
         //跳转
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }

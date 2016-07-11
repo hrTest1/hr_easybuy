@@ -2,6 +2,7 @@ package sdkd.com.ec.controller;
 
 import sdkd.com.ec.dao.BaseDao;
 import sdkd.com.ec.dao.impl.EbUserDao;
+import sdkd.com.ec.model.EbUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,11 @@ public class EbUserLoginController extends HttpServlet {
 
         String name=request.getParameter("userName");
         String password=request.getParameter("passWord");
+        EbUser ebUser=new EbUser();
 
         if(name!=null && !"".equals(name) && password!=null && !"".equals(password)){
+            ebUser.setName(name);
+            ebUser.setPassword(password);
             List<String> params = new ArrayList<String>();
             String sql="select eu_user_name,eu_password from easybuy_user";
             ResultSet rs = new BaseDao().executeSearch(sql,null);
@@ -47,7 +51,8 @@ public class EbUserLoginController extends HttpServlet {
                         }
                      }
                     if(user.isLogin()==true){
-                        request.setAttribute("name",name);
+                        request.getSession().setAttribute("ebuser",ebUser);
+                        request.setAttribute("user",user);
                         request.getRequestDispatcher("/index.do").forward(request,response);
                     }
                     else{
